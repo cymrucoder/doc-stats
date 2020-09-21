@@ -8,14 +8,21 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DocumentTest {
 
     Document document;
+    Document emptyDocument;
 
     public DocumentTest() {
-        document = new Document(getClass().getClassLoader().getResource("testdoc.txt").getPath());
+        document = new Document(getClass().getClassLoader().getResource("testdoc.txt").getPath());// Test file is lorem ipsum split into separate lines
+        emptyDocument = new Document(getClass().getClassLoader().getResource("emptydoc.txt").getPath());// Test file is empty
     }
 
     @Test
     public void testCountLines_whenFileExists_shouldReturnCorrectNumber() throws IOException {
-        assertEquals(document.getLineCount(), 6);
+        assertEquals(6, document.getLineCount());
+    }
+
+    @Test
+    public void testCountLines_whenFileEmpty_shouldReturnCorrectNumber() throws IOException {
+        assertEquals(0, emptyDocument.getLineCount());
     }
 
     @Test
@@ -24,5 +31,15 @@ public class DocumentTest {
         assertThrows(FileNotFoundException.class, () -> {
             documentThatDoesntExist.getLineCount();
         }, "Exception not thrown when file doesn't exist.");
+    }
+
+    @Test
+    public void testAverageWordLength_whenFileExists_shouldReturnCorrectNumber() throws IOException {
+        assertEquals("5.5", document.getAverageWordLength());// 377 characters / 69 words
+    }
+
+    @Test
+    public void testAverageWordLength_whenFileEmpty_shouldReturnCorrectNumber() throws IOException {
+        assertEquals("0.0", emptyDocument.getAverageWordLength());// 0 characters or words, so the average is 0
     }
 }
