@@ -21,7 +21,7 @@ public class DocumentTest {
     @Test
     public void testCountLines_whenFileDoesntExist_shouldThrowException() throws IOException {
         Document documentThatDoesntExist = new Document("filethatdoesntexist");
-        Exception exception = assertThrows(FileNotFoundException.class, () -> {
+        assertThrows(FileNotFoundException.class, () -> {
             documentThatDoesntExist.getLineCount();
         }, "Exception not thrown when file doesn't exist.");
     }
