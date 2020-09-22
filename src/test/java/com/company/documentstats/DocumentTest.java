@@ -50,6 +50,16 @@ public class DocumentTest {
 
     @Test
     public void testWordCount_whenFileEmpty_shouldReturnCorrectNumber() throws IOException {
-        assertEquals(0, emptyDocument.getWordCount());// 69 words
+        assertEquals(0, emptyDocument.getWordCount());
+    }
+
+    @Test
+    public void testMostCommonLetter_whenFileExists_shouldReturnCorrectLetter() throws IOException {
+        assertEquals("i", document.getMostCommonLetter());// i appears 42 times
+    }
+
+    @Test
+    public void testMostCommonLetter_whenFileEmpty_shouldReturnEmptyString() throws IOException {
+        assertEquals("", emptyDocument.getMostCommonLetter());
     }
 }

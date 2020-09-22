@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Document {
 
@@ -14,6 +16,7 @@ public class Document {
     public Document(String filePath) {
         this.filePath = filePath;
     }
+
 
     public int getLineCount() throws FileNotFoundException, IOException {
         BufferedReader br = new BufferedReader(new FileReader(filePath));
@@ -68,5 +71,41 @@ public class Document {
         }
 
         return wordCount;
+    }
+
+    public String getMostCommonLetter() throws FileNotFoundException, IOException {
+        BufferedReader br = new BufferedReader(new FileReader(filePath));
+        Map<Character, Integer> letters = new HashMap<>();
+
+        String line;
+
+        while ((line = br.readLine()) != null) {
+            for (int i = 0; i < line.length(); i++) {
+                char ch = line.charAt(i);
+                if (Character.isLetter(ch)) {
+                    if (!letters.containsKey(ch)) {
+                        letters.put(ch, 1);
+                    } else {
+                        letters.put(ch, letters.get(ch) + 1);
+                    }
+                }
+            }
+        }
+
+        if (letters.isEmpty()) {// Given text contained no letters
+            return "";
+        }
+
+        char mostCommonCharacter = 0;
+        int mostOccurences = 0;
+
+        for (Map.Entry<Character, Integer> entry : letters.entrySet()) {
+            if (entry.getValue() > mostOccurences) {
+                mostCommonCharacter = entry.getKey();
+                mostOccurences = entry.getValue();
+            }
+        }
+
+        return "" + mostCommonCharacter;
     }
 }
