@@ -53,4 +53,20 @@ public class Document {
 
         return roundingFormat.format(averageWordLength);
     }
+
+    public int getWordCount() throws FileNotFoundException, IOException {
+        BufferedReader br = new BufferedReader(new FileReader(filePath));
+        int wordCount = 0;
+
+        String line;
+
+        while ((line = br.readLine()) != null) {
+            line = line.trim();// Trim for the same reason as average word length method
+            if (!line.isEmpty()) {
+                wordCount += line.split("\\s+").length;
+            }
+        }
+
+        return wordCount;
+    }
 }

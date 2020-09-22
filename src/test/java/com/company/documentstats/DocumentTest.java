@@ -42,4 +42,14 @@ public class DocumentTest {
     public void testAverageWordLength_whenFileEmpty_shouldReturnCorrectNumber() throws IOException {
         assertEquals("0.0", emptyDocument.getAverageWordLength());// 0 characters or words, so the average is 0
     }
+
+    @Test
+    public void testWordCount_whenFileExists_shouldReturnCorrectNumber() throws IOException {
+        assertEquals(69, document.getWordCount());// 69 words
+    }
+
+    @Test
+    public void testWordCount_whenFileEmpty_shouldReturnCorrectNumber() throws IOException {
+        assertEquals(0, emptyDocument.getWordCount());// 69 words
+    }
 }
