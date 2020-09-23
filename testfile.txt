@@ -1,0 +1,5 @@
+This is a test file. It contains some words and sentences.
+Some of these words are on different lines.
+Others are going onto this third line. This line will end soon.
+Some lines have some other symbols 222'2222 just to show they aren't counted
+This file has 5 lines.

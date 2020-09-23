@@ -15,5 +15,4 @@ tbd
 ** Todo
 
 * Write build instructions
-* Use in main class
 * Decide what types to return
