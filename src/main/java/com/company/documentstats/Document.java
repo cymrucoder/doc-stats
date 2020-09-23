@@ -18,6 +18,12 @@ public class Document {
     }
 
 
+    /**
+     * Counts number of lines in the given file.
+     * @return int value of number of lines
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public int getLineCount() throws FileNotFoundException, IOException {
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         int lineCount = 0;
@@ -31,6 +37,12 @@ public class Document {
         return lineCount;
     }
 
+    /**
+     * Calculates the average length of a word in the given file.
+     * @return String of the average word length, rounded to one decimal place
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public String getAverageWordLength() throws FileNotFoundException, IOException {
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         int charCount = 0;
@@ -57,6 +69,12 @@ public class Document {
         return roundingFormat.format(averageWordLength);
     }
 
+    /**
+     * Counts the number of whitespace delimited words in the given file.
+     * @return int value of the number of words
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public int getWordCount() throws FileNotFoundException, IOException {
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         int wordCount = 0;
@@ -73,6 +91,12 @@ public class Document {
         return wordCount;
     }
 
+    /**
+     * Find the most common letter in the given file, case insensitive.
+     * @return String of the most common letter, or empty string if there is no most common letter
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public String getMostCommonLetter() throws FileNotFoundException, IOException {
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         Map<Character, Integer> letters = new HashMap<>();

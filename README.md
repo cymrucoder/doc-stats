@@ -15,4 +15,5 @@ tbd
 ** Todo
 
 * Write build instructions
-* Write javadocs
+* Use in main class
+* Decide what types to return
