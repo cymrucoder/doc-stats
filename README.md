@@ -17,6 +17,7 @@ java -jar DocumentStats-1.0.jar [file]
 ## Design decisions and assumptions
 
 * The file isn't read until the statistic methods run, as it may have changed since the constructor was run
+* The requirements ask for code that is easy to extend to other statistics, so the getCharacterCount has been split into a separate method. This is a useful building block for creating other statistics, and worth the performance impact.
 * Case is insensitive, so count upper and lower case letters together
 * The average character count returns as a string - while you could return a rounded double it's not precise
 * Trailing lines without a line break aren't included - so an empty file has no lines
