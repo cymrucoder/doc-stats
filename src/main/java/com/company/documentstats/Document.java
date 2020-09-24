@@ -93,11 +93,11 @@ public class Document {
 
     /**
      * Find the most common letter in the given file, case insensitive.
-     * @return String of the most common letter, or empty string if there is no most common letter
+     * @return char of the most common letter, or null char if there is no most common letter
      * @throws FileNotFoundException
      * @throws IOException 
      */
-    public String getMostCommonLetter() throws FileNotFoundException, IOException {
+    public char getMostCommonLetter() throws FileNotFoundException, IOException {
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         Map<Character, Integer> letters = new HashMap<>();
 
@@ -105,7 +105,7 @@ public class Document {
 
         while ((line = br.readLine()) != null) {
             for (int i = 0; i < line.length(); i++) {
-                char ch = line.charAt(i);
+                char ch = Character.toLowerCase(line.charAt(i));
                 if (Character.isLetter(ch)) {
                     if (!letters.containsKey(ch)) {
                         letters.put(ch, 1);
@@ -116,8 +116,8 @@ public class Document {
             }
         }
 
-        if (letters.isEmpty()) {// Given text contained no letters
-            return "";
+        if (letters.isEmpty()) {// Given text contained no letters so return null char
+            return Character.MIN_VALUE;
         }
 
         char mostCommonCharacter = 0;
@@ -130,6 +130,6 @@ public class Document {
             }
         }
 
-        return "" + mostCommonCharacter;
+        return mostCommonCharacter;
     }
 }

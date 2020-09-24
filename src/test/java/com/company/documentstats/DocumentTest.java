@@ -9,10 +9,12 @@ public class DocumentTest {
 
     Document document;
     Document emptyDocument;
+    Document multipleCasesDocument;
 
     public DocumentTest() {
         document = new Document(getClass().getClassLoader().getResource("testdoc.txt").getPath());// Test file is lorem ipsum split into separate lines
         emptyDocument = new Document(getClass().getClassLoader().getResource("emptydoc.txt").getPath());// Test file is empty
+        multipleCasesDocument = new Document(getClass().getClassLoader().getResource("casetestdoc.txt").getPath());// Test file is empty
     }
 
     @Test
@@ -55,11 +57,16 @@ public class DocumentTest {
 
     @Test
     public void testMostCommonLetter_whenFileExists_shouldReturnCorrectLetter() throws IOException {
-        assertEquals("i", document.getMostCommonLetter());// i appears 42 times
+        assertEquals('i', document.getMostCommonLetter());// i appears 42 times
     }
 
     @Test
-    public void testMostCommonLetter_whenFileEmpty_shouldReturnEmptyString() throws IOException {
-        assertEquals("", emptyDocument.getMostCommonLetter());
+    public void testMostCommonLetter_whenFileEmpty_shouldReturnNullChar() throws IOException {
+        assertEquals(Character.MIN_VALUE, emptyDocument.getMostCommonLetter());
+    }
+
+    @Test
+    public void testMostCommonLetter_whenDifferentCases_shouldReturnCorrectLetter() throws IOException {
+        assertEquals('e', multipleCasesDocument.getMostCommonLetter());// e appears 3 times in each case so in total is most common
     }
 }
