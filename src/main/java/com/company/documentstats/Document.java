@@ -1,9 +1,12 @@
 package com.company.documentstats;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,10 +25,10 @@ public class Document {
      * Counts number of lines in the given file.
      * @return int value of number of lines
      * @throws FileNotFoundException
-     * @throws IOException 
+     * @throws IOException
      */
     public int getLineCount() throws FileNotFoundException, IOException {
-        BufferedReader br = new BufferedReader(new FileReader(filePath));
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8));
         int lineCount = 0;
 
         while ((br.readLine()) != null) {
@@ -41,10 +44,10 @@ public class Document {
      * Calculates the average length of a word in the given file.
      * @return String of the average word length, rounded to one decimal place
      * @throws FileNotFoundException
-     * @throws IOException 
+     * @throws IOException
      */
     public String getAverageWordLength() throws FileNotFoundException, IOException {
-        BufferedReader br = new BufferedReader(new FileReader(filePath));
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8));
         int charCount = 0;
         int wordCount = 0;
 
@@ -73,10 +76,10 @@ public class Document {
      * Counts the number of whitespace delimited words in the given file.
      * @return int value of the number of words
      * @throws FileNotFoundException
-     * @throws IOException 
+     * @throws IOException
      */
     public int getWordCount() throws FileNotFoundException, IOException {
-        BufferedReader br = new BufferedReader(new FileReader(filePath));
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8));
         int wordCount = 0;
 
         String line;
@@ -88,6 +91,8 @@ public class Document {
             }
         }
 
+        br.close();
+
         return wordCount;
     }
 
@@ -95,10 +100,10 @@ public class Document {
      * Find the most common letter in the given file, case insensitive.
      * @return char of the most common letter, or null char if there is no most common letter
      * @throws FileNotFoundException
-     * @throws IOException 
+     * @throws IOException
      */
     public char getMostCommonLetter() throws FileNotFoundException, IOException {
-        BufferedReader br = new BufferedReader(new FileReader(filePath));
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8));
         Map<Character, Integer> letters = new HashMap<>();
 
         String line;
@@ -115,6 +120,8 @@ public class Document {
                 }
             }
         }
+
+        br.close();
 
         if (letters.isEmpty()) {// Given text contained no letters so return null char
             return Character.MIN_VALUE;
