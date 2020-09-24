@@ -3,7 +3,6 @@ package com.company.documentstats;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -28,14 +27,14 @@ public class Document {
      * @throws IOException
      */
     public int getLineCount() throws FileNotFoundException, IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8));
-        int lineCount = 0;
+        int lineCount;
 
-        while ((br.readLine()) != null) {
-            lineCount++;
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8))) {
+            lineCount = 0;
+            while ((br.readLine()) != null) {
+                lineCount++;
+            }
         }
-
-        br.close();
 
         return lineCount;
     }
@@ -47,21 +46,21 @@ public class Document {
      * @throws IOException
      */
     public String getAverageWordLength() throws FileNotFoundException, IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8));
-        int charCount = 0;
-        int wordCount = 0;
+        int charCount;
+        int wordCount;
 
-        String line;
-
-        while ((line = br.readLine()) != null) {
-            line = line.trim();// Trim whitespace otherwise the split below will create extra elements before or after surrounding whitespace
-            if (!line.isEmpty()) {// An empty line still splits into an array with one element, so skip these
-                wordCount += line.split("\\s+").length;
-                charCount += line.replaceAll("\\s+", "").length();
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8))) {
+            charCount = 0;
+            wordCount = 0;
+            String line;
+            while ((line = br.readLine()) != null) {
+                line = line.trim();// Trim whitespace otherwise the split below will create extra elements before or after surrounding whitespace
+                if (!line.isEmpty()) {// An empty line still splits into an array with one element, so skip these
+                    wordCount += line.split("\\s+").length;
+                    charCount += line.replaceAll("\\s+", "").length();
+                }
             }
         }
-
-        br.close();
 
         if (0 == wordCount) {
             return "0.0";// Avoid dividing by 0 if the file is empty
@@ -79,19 +78,18 @@ public class Document {
      * @throws IOException
      */
     public int getWordCount() throws FileNotFoundException, IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8));
-        int wordCount = 0;
+        int wordCount;
 
-        String line;
-
-        while ((line = br.readLine()) != null) {
-            line = line.trim();// Trim for the same reason as average word length method
-            if (!line.isEmpty()) {
-                wordCount += line.split("\\s+").length;
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8))) {
+            wordCount = 0;
+            String line;
+            while ((line = br.readLine()) != null) {
+                line = line.trim();// Trim for the same reason as average word length method
+                if (!line.isEmpty()) {
+                    wordCount += line.split("\\s+").length;
+                }
             }
         }
-
-        br.close();
 
         return wordCount;
     }
@@ -103,25 +101,24 @@ public class Document {
      * @throws IOException
      */
     public char getMostCommonLetter() throws FileNotFoundException, IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8));
-        Map<Character, Integer> letters = new HashMap<>();
+        Map<Character, Integer> letters;
 
-        String line;
-
-        while ((line = br.readLine()) != null) {
-            for (int i = 0; i < line.length(); i++) {
-                char ch = Character.toLowerCase(line.charAt(i));
-                if (Character.isLetter(ch)) {
-                    if (!letters.containsKey(ch)) {
-                        letters.put(ch, 1);
-                    } else {
-                        letters.put(ch, letters.get(ch) + 1);
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8))) {
+            letters = new HashMap<>();
+            String line;
+            while ((line = br.readLine()) != null) {
+                for (int i = 0; i < line.length(); i++) {
+                    char ch = Character.toLowerCase(line.charAt(i));
+                    if (Character.isLetter(ch)) {
+                        if (!letters.containsKey(ch)) {
+                            letters.put(ch, 1);
+                        } else {
+                            letters.put(ch, letters.get(ch) + 1);
+                        }
                     }
                 }
             }
         }
-
-        br.close();
 
         if (letters.isEmpty()) {// Given text contained no letters so return null char
             return Character.MIN_VALUE;

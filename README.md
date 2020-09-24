@@ -2,9 +2,16 @@
 Generate some statistics about text documents.
 
 ## Build
-tbd
+This is a Maven project, so simply run:
+
+mvn install
+
+in the main project directory.
 
 ## Usage
+These methods can be used by an external project by passing in a filepath to the constructor.
+To generate all the statistics for a file in the command line, run:
+
 java -jar DocumentStats-1.0.jar [file]
 
 ## Assumptions
@@ -16,7 +23,4 @@ java -jar DocumentStats-1.0.jar [file]
 
 ## Todo
 
-* Write build instructions
-* Really sort out exceptions
 * Tag
-* Close readers or do try with resources

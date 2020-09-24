@@ -16,7 +16,7 @@ public class DocumentTest {
         document = new Document(getClass().getClassLoader().getResource("testdoc.txt").getPath());// Test file is lorem ipsum split into separate lines
         emptyDocument = new Document(getClass().getClassLoader().getResource("emptydoc.txt").getPath());// Test file is empty
         multipleCasesDocument = new Document(getClass().getClassLoader().getResource("casetestdoc.txt").getPath());// Test file is empty
-        chineseTextDocument = new Document(getClass().getClassLoader().getResource("chinesetext.txt").getPath());// Test file is empty
+        chineseTextDocument = new Document(getClass().getClassLoader().getResource("chinesetext.txt").getPath());// Test file contains higher Unicode code points (Chinese text)
     }
 
     @Test
