@@ -14,12 +14,13 @@ To generate all the statistics for a file in the command line, run:
 
 java -jar DocumentStats-1.0.jar [file]
 
-## Assumptions
+## Design decisions and assumptions
 
-* Case is insensitive, count upper and lower case letters together
-* Average character count returns as a string - while you could return a rounded double it's not precise
+* The file isn't read until the statistic methods run, as it may have changed since the constructor was run
+* Case is insensitive, so count upper and lower case letters together
+* The average character count returns as a string - while you could return a rounded double it's not precise
 * Trailing lines without a line break aren't included - so an empty file has no lines
-* Most common *letter*, so we can ignore numbers and other symbols (including extended Unicode points)
+* The requirement is for the most common *letter*, so we can ignore numbers and other symbols (including extended Unicode points)
 
 ## Todo
 

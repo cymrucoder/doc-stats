@@ -21,7 +21,7 @@ public class Stats {
                 PrintStream out = new PrintStream(System.out, true, "UTF-8");// This is the only statistic that might need to print non ASCII characters
                 out.println("Most common letter: " + doc.getMostCommonLetter());
             } catch (IOException ex) {
-                Logger.getLogger(Stats.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Stats.class.getName()).log(Level.SEVERE, "Error while reading file, may not exist or have moved during read. Exception:", ex);
             }
         }
     }
