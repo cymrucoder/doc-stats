@@ -6,13 +6,15 @@ This is a Maven project, so simply run:
 
 mvn install
 
-in the main project directory.
+in the main project directory. You may need to set up JAVA_HOME first, and give a full path to Maven.
 
 ## Usage
 These methods can be used by an external project by passing in a filepath to the constructor.
 To generate all the statistics for a file in the command line, run:
 
 java -jar DocumentStats-1.0.jar [file]
+
+You may need to give a full path to Java.
 
 ## Design decisions and assumptions
 
