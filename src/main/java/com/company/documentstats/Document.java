@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class Document {
 
-    private static final DecimalFormat roundingFormat = new DecimalFormat("0.0");
+    private static final DecimalFormat roundingFormat = new DecimalFormat("0.0");// One decimal place
     String filePath;
 
     public Document(String filePath) {

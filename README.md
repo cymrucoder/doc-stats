@@ -22,7 +22,3 @@ java -jar DocumentStats-1.0.jar [file]
 * The average character count returns as a string - while you could return a rounded double it's not precise
 * Trailing lines without a line break aren't included - so an empty file has no lines
 * The requirement is for the most common *letter*, so we can ignore numbers and other symbols (including extended Unicode points)
-
-## Todo
-
-* Tag
