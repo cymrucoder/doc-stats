@@ -12,7 +12,7 @@ in the main project directory. You may need to set up JAVA_HOME first, and give 
 These methods can be used by an external project by passing in a filepath to the constructor.
 To generate all the statistics for a file in the command line, run:
 
-java -jar DocumentStats-1.0.jar [file]
+java -jar DocumentStats-1.0.2.jar [file]
 
 You may need to give a full path to Java.
 
